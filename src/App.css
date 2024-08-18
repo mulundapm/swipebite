@@ -1,0 +1,260 @@
+* {
+padding: 0;
+margin: 0;
+font-family: "Karla", sans-serif;
+user-select: none;
+}
+
+*::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+.logo{
+  padding-top: 20px;
+}
+.center {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+img{
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+.main-image{
+  width: 380px;
+  height: 550px;
+  display: block;
+  min-width: 90%;
+  left: 5%;
+  right: 5%;
+}
+
+.restaurant-image{
+  width: 380px;
+  height: 150px;
+}
+
+.container{
+  padding: 15px;
+  position: relative;
+}
+
+.card{
+  position: absolute;
+}
+
+.control-icon{
+  color: #FDD264;
+}
+
+.float-text{
+  position: absolute;
+  transform: translate(0px,0px);
+  bottom: 0;
+  /* left: 9%; */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Background color with transparency */
+  color: white; 
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.inline{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* .grid{
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-gap: 50px; 
+} */
+
+.control-icon{
+  justify-content: center;
+  display: grid;
+}
+
+.dish-control{
+  display: flex;
+  position: absolute;
+  bottom: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  width: fit-content;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.card-stack{
+  min-height: 50%;
+  width: 100vw;
+  position: relative;
+}
+/* Image slider */
+
+.slider-container {
+  display: flex;
+  width: 100%;
+  overflow: auto;
+}
+.slider-image {
+  background-color: #fff;
+  width: 120px;
+  height: 150px;
+  margin: 10px;
+}
+
+a{
+  text-decoration: none;
+}
+
+.content-holder{
+  padding-bottom:60px;
+  flex-grow: 1;
+}
+
+.desktop-background{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #EDEFEE;
+}
+
+.app-container{
+  max-width: 414px;
+  max-height: 896px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.app-content{
+  max-width: 414px;
+  max-height: 896px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navbar{
+  position: sticky;
+  max-width: 100%;
+  bottom: 0;
+}
+
+.primary-button{
+  background-color: #F4CE14;
+  padding: 10px 20px;
+  border-radius: 16px;
+  border: none;
+  font-weight: 700;
+}
+
+.row{
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  padding: 5px;
+  text-align: center;
+  column-gap: 5px;
+}
+
+input{
+  background-color: #EDEFEE;
+  padding: 10px;
+  border: none;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.contact-info{
+  position: absolute;
+  left: 50%; 
+  transform: translate(-50%, 0%);
+  bottom: 20px;
+  color: #495E57;
+}
+
+.mail-list{
+  align-items: center;
+  text-align: center;
+}
+
+/* If smaller than XR */
+@media (max-height: 895px) or (max-width: 413px) {
+  .app-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .app-content{
+    min-width: 95%;
+    max-height: 100vh;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card{
+    width: fit-content;
+    
+  }
+
+  .main-image{
+    display: block;
+    width: 350px;
+    height: 55vh;
+  }
+  
+  .restaurant-image{
+    width: 100%;
+  }
+
+  .dish-control{
+    bottom: 0px;
+    /* display: flex;
+    position: absolute;
+    bottom: 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: fit-content;
+    left: 50%;
+    transform: translateX(-50%); */
+  }
+
+  .navbar{
+    position: sticky;
+    max-width: 100%;
+    bottom: 0;
+  }
+}
+
