@@ -1,17 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.8fdccf9f.css",
-    "main.js": "/static/js/main.24b80523.js",
+    "main.js": "/static/js/main.0df913bb.js",
     "static/js/453.4baca2de.chunk.js": "/static/js/453.4baca2de.chunk.js",
-    "static/media/cropped-restaurant.jpeg": "/static/media/cropped-restaurant.425162b7026395d0f85e.jpeg",
     "static/media/swipebite-high-resolution-logo-transparent.png": "/static/media/swipebite-high-resolution-logo-transparent.e20fec7369c205a2fc22.png",
     "index.html": "/index.html",
     "main.8fdccf9f.css.map": "/static/css/main.8fdccf9f.css.map",
-    "main.24b80523.js.map": "/static/js/main.24b80523.js.map",
+    "main.0df913bb.js.map": "/static/js/main.0df913bb.js.map",
     "453.4baca2de.chunk.js.map": "/static/js/453.4baca2de.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8fdccf9f.css",
-    "static/js/main.24b80523.js"
+    "static/js/main.0df913bb.js"
   ]
 }
