@@ -8,10 +8,10 @@ return (
             {reviews.map((review, index)=>(
                 <div key={index}>
                     <div className="inline">
-                        <h5>{review.title}</h5>
+                        <h5>{review.name}</h5>
                         <Rating name="disabled" value={review.rating} readOnly/>
                     </div>
-                    <p>{review.description}</p>
+                    <p>{review.review_text}</p>
                     <br />
                 </div>
             ))}

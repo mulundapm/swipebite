@@ -10,8 +10,7 @@ function ImageSlider({menuItems}) {
     const loadMenuItems = async () => {
       const updatedItems = await Promise.all(
         menuItems.map(async (item) => {
-          const imageUrl = await getDownloadURL(ref(storage, item.img)); 
-          return { ...item, img: imageUrl };
+          return { ...item };
         })
       );
       setUpdatedMenuItems(updatedItems); 
@@ -24,7 +23,7 @@ function ImageSlider({menuItems}) {
     <div className='slider-container'>
       {updatedMenuItems.map((item, index) => (
         <div key={index} className='slider-item'>
-          <img src={item.img} alt={item.name} className='slider-image' />
+          <img src={item.image} alt={item.name} className='slider-image' />
           <p className='center'>{item.name}</p>
         </div>
       ))

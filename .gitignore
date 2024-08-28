@@ -19,6 +19,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
-
+path
 # eslint cache
 .eslintcache

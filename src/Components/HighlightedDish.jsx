@@ -9,16 +9,16 @@ import { useEffect } from 'react';
 import { FavoriteContext } from '../Contexts/FavoriteDishes';
 import { useContext } from 'react';
 // import FavouriteDishes from './FavouriteDishes';
-import { db , storage} from '../config/firebase'
-import { getDocs , getDoc, collectionGroup, doc as firestoreDoc, collection,  getCountFromServer, getAggregateFromServer, average} from 'firebase/firestore'
-import { getDownloadURL, ref } from 'firebase/storage';
+import { db } from '../config/firebase'
+import { getDocs , getDoc, collectionGroup, doc as firestoreDoc} from 'firebase/firestore'
+
 
 function HighlightedDish() {
   
   const [foodList, setFoodList] =useState([])
   const [availableDishes, setAvailableDishes] = useState([]);
   const {favoriteDishes, setFavoriteDishes} = useContext(FavoriteContext);
-  const menuItemCollectionRef = collectionGroup(db, "menu-items")
+  const menuItemCollectionRef = collectionGroup(db, "menu_items")
   const [loading, setLoading] = useState(true)
   
 
@@ -26,24 +26,24 @@ function HighlightedDish() {
       const getfoodList = async () =>{
           try {
             const menuItem = await getDocs(menuItemCollectionRef);
-            const foodListWithUrls = await Promise.all(menuItem.docs.map(async (doc) => {
+            const loadedFoodList = await Promise.all(menuItem.docs.map(async (doc) => {
               const docData = doc.data();
 
-              const imageRef = ref(storage, docData.img);
-              const imageUrl = await getDownloadURL(imageRef);
+              // const imageRef = ref(storage, docData.img);
+              // const imageUrl = await getDownloadURL(imageRef);
 
               const restaurantID = doc.ref.parent.parent.id;
               const restaurantRef = firestoreDoc(db, 'restaurants', restaurantID);
               const restaurantDoc = await getDoc(restaurantRef)
               const restaurantData = restaurantDoc.exists() ? restaurantDoc.data() : {};
 
-              const reviewsRef = collection(db, 'restaurants', restaurantID, 'reviews');
-              const reviewsCount = await getCountFromServer(reviewsRef)
-              const reviewsAverage = await getAggregateFromServer(reviewsRef, {averageRating: average("rating")})
+              // const reviewsRef = collection(db, 'restaurants', restaurantID, 'reviews');
+              // const reviewsCount = await getCountFromServer(reviewsRef)
+              // const reviewsAverage = await getAggregateFromServer(reviewsRef, {averageRating: average("rating")})
               
-              return { ...docData, id: doc.id, fullPath: imageUrl, restaurantID: restaurantID, restaurantData, counts: reviewsCount.data().count, ratings: reviewsAverage.data().averageRating};
+              return { ...docData, id: doc.id, restaurantID: restaurantID, restaurantData};
             }));
-              setFoodList(foodListWithUrls);
+              setFoodList(loadedFoodList);
               // console.log(foodListWithUrls)
           } catch (err) {
             console.error(err);
@@ -67,8 +67,7 @@ function HighlightedDish() {
   const memoizedAvailableDishes = useMemo(() => randomiseDishes([...foodList]), [foodList]);
   
   useEffect(() => {
-    setAvailableDishes(memoizedAvailableDishes);
-    console.log(memoizedAvailableDishes)
+    setAvailableDishes(memoizedAvailableDishes.slice(0, 30));
   }, [memoizedAvailableDishes]);
 
 
@@ -102,17 +101,17 @@ function HighlightedDish() {
       { availableDishes.length > 0 ? availableDishes.map((dish, index) => (
         <div key={index} className="card">
           <Link to={`restaurant/${dish.restaurantID}` }>
-              <img className="main-image" alt={dish.name} src={dish.fullPath}/>
+              <img className="main-image" alt={dish.restaurantData.name} src={dish.image}/>
               <div className="float-text">
                 <Stack direction="row" spacing={1}>
-                  <h2>{dish.name}</h2>
+                  <h3>{dish.restaurantData.name}</h3>
                   {/* <Chip label={dish.type} variant="outlined" color='primary'/>
                   <Chip label="Popular" variant="outlined" color='primary'/> */}
                 </Stack>
-                <h3>{dish.restaurantData.name}</h3>
+                <h4>{dish.restaurantData.cuisine}</h4>
                 <div className="inline">
-                  <Rating name="disabled" value={dish.ratings} readOnly/>
-                  <h6>{dish.counts} reviews</h6> 
+                  <Rating name="disabled" value={dish.restaurantData.rating} readOnly/>
+                  <h6>{dish.restaurantData.reviews} reviews</h6> 
                 </div>
               </div>
           </Link>
