@@ -29,22 +29,14 @@ function HighlightedDish() {
             const loadedFoodList = await Promise.all(menuItem.docs.map(async (doc) => {
               const docData = doc.data();
 
-              // const imageRef = ref(storage, docData.img);
-              // const imageUrl = await getDownloadURL(imageRef);
-
               const restaurantID = doc.ref.parent.parent.id;
               const restaurantRef = firestoreDoc(db, 'restaurants', restaurantID);
               const restaurantDoc = await getDoc(restaurantRef)
               const restaurantData = restaurantDoc.exists() ? restaurantDoc.data() : {};
 
-              // const reviewsRef = collection(db, 'restaurants', restaurantID, 'reviews');
-              // const reviewsCount = await getCountFromServer(reviewsRef)
-              // const reviewsAverage = await getAggregateFromServer(reviewsRef, {averageRating: average("rating")})
-              
               return { ...docData, id: doc.id, restaurantID: restaurantID, restaurantData};
             }));
               setFoodList(loadedFoodList);
-              // console.log(foodListWithUrls)
           } catch (err) {
             console.error(err);
           } finally {
@@ -111,7 +103,7 @@ function HighlightedDish() {
                 <h4>{dish.restaurantData.cuisine}</h4>
                 <div className="inline">
                   <Rating name="disabled" value={dish.restaurantData.rating} readOnly/>
-                  <h6>{dish.restaurantData.reviews} reviews</h6> 
+                  <h6>{dish.restaurantData.review_count} reviews</h6> 
                 </div>
               </div>
           </Link>

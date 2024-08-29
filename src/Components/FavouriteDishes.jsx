@@ -12,31 +12,27 @@ import { Link } from 'react-router-dom';
 
 
 function FavouriteDishes() {
- const {favoriteDishes} = useContext(FavoriteContext)
-
+const {favoriteDishes} = useContext(FavoriteContext)
+console.log(favoriteDishes)
     const displayList = (list) =>
         list.map(dish=>
             <>
                 <Grid item xs={6}>
-                    <Link to={`/restaurant/${dish.restaurant}`}>
+                    <Link to={`/restaurant/${dish.restaurantID}`}>
                     <Card sx={{ maxWidth: 200 }}>
                         <CardActionArea>
                             <CardMedia
                                 component="img"
                                 height="140"
-                                image={dish.img}
+                                image={dish.image}
                                 alt="green iguana" />
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    {dish.name}
-                                </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    {dish.restaurant}
+                                    {dish.restaurantData.name}
                                 </Typography>
                                 <div className="inline">
-                                    <Rating name="disabled" value={4} />
+                                    <Rating name="disabled" value={dish.restaurantData.rating} />
                                 </div>
-                                <h5>400m from you</h5>
                             </CardContent>
                         </CardActionArea>
                     </Card>
